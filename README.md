@@ -1,7 +1,8 @@
 # Terraform Module: Azure vnet peering hub to spoke
 
-## use
+## Use
 
+```terraform
 module "peering" {
   source = "github.com/ukho/tfmodule-azure-vnet-peering-hub-to-spoke?ref=x.y.z"
   hubsubscription = "[hub_subscription_id]"
@@ -13,3 +14,4 @@ module "peering" {
   peer1to2 = "peering-[hub-vnetname]-to-${var.ProjectIdentity}-vnet"
   peer2to1 = "peering-${var.ProjectIdentity}-vnet-to-[hub-vnetname]"
 }
+```
