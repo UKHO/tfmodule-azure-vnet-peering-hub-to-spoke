@@ -1,13 +1,9 @@
 provider "azurerm" {
-  version = "~> 1.41"
   alias = "hub"
-  subscription_id = var.hubsubscription
 }
 
 provider "azurerm" {
-  version = "~> 1.41"
   alias = "spoke"
-  subscription_id = var.spokesubscription
 }
 
 data "azurerm_resource_group" "hub" {
