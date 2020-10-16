@@ -1,9 +1,3 @@
-variable "hubsubscription" {
-  default = ""
-}
-variable "spokesubscription" {
-  default = ""
-}
 variable "hubrg" {
   default = ""
 }
