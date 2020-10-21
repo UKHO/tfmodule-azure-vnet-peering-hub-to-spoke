@@ -4,14 +4,16 @@
 
 ```terraform
 module "peering" {
-  source = "github.com/ukho/tfmodule-azure-vnet-peering-hub-to-spoke?ref=x.y.z"
-  hubsubscription = "[hub_subscription_id]"
-  spokesubscription = "${var.SubscriptionId}"
-  hubrg = "[hub-rgname]"
-  spokerg = "[spoke-rgname]"
-  hubvnet = "[hubvnetnmame]"
-  spokevnet = "${var.ProjectIdentity}-vnet"
-  peer1to2 = "peering-[hub-vnetname]-to-${var.ProjectIdentity}-vnet"
-  peer2to1 = "peering-${var.ProjectIdentity}-vnet-to-[hub-vnetname]"
+  source                      = "github.com/ukho/tfmodule-azure-vnet-peering-hub-to-spoke?ref=0.2.0"
+  providers = {
+        azurerm.hub   = azurerm.hub
+        azurerm.spoke = azurerm.spoke
+}
+  hubrg                       = "UKHO-VPN-RG"
+  spokerg                     =  azurerm_resource_group.rg.name
+  hubvnet                     = "UKHO-VPN-vnet"
+  spokevnet                   = "${var.ProjectIdentity}-vnet"
+  peer1to2                    = "peering-UKHO-VPN-vnet-to-${var.ProjectIdentity}-vnet"
+  peer2to1                    = "peering-${var.ProjectIdentity}-vnet-to-UKHO-VPN-vnet"
 }
 ```
