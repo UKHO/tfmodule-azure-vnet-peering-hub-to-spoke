@@ -1,11 +1,3 @@
-provider "azurerm" {
-  alias = "hub"
-}
-
-provider "azurerm" {
-  alias = "spoke"
-}
-
 data "azurerm_resource_group" "hub" {
   provider = azurerm.hub
   name     = var.hubrg
