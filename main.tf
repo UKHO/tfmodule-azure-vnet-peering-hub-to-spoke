@@ -30,6 +30,10 @@ resource "azurerm_virtual_network_peering" "vnet_peer_1" {
   allow_forwarded_traffic      = true
   allow_gateway_transit        = true
   use_remote_gateways          = false
+
+  lifecycle {
+    ignore_changes = [remote_virtual_network_id]
+  }
 }
 
 resource "azurerm_virtual_network_peering" "vnet_peer_2" {
@@ -42,6 +46,10 @@ resource "azurerm_virtual_network_peering" "vnet_peer_2" {
   allow_forwarded_traffic      = true
   allow_gateway_transit        = false
   use_remote_gateways          = true
+
+    lifecycle {
+    ignore_changes = [remote_virtual_network_id]
+  }
 }
 
 
