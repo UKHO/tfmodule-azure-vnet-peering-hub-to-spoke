@@ -1,25 +1,3 @@
-data "azurerm_resource_group" "hub" {
-  provider = azurerm.hub
-  name     = var.hubrg
-}
-
-data "azurerm_resource_group" "spoke" {
-  provider = azurerm.spoke
-  name     = var.spokerg
-}
-
-data "azurerm_virtual_network" "hubvnet" {
-provider                       = azurerm.hub
-name                           = var.hubvnet
-resource_group_name            = data.azurerm_resource_group.hub.name
-}
-
-data "azurerm_virtual_network" "spokevnet" {
-  provider                     = azurerm.spoke
-  name                         = var.spokevnet
-  resource_group_name          = data.azurerm_resource_group.spoke.name
-}
-
 resource "azurerm_virtual_network_peering" "vnet_peer_1" {
   provider                     = azurerm.hub
   name                         = var.peer1to2
@@ -30,6 +8,10 @@ resource "azurerm_virtual_network_peering" "vnet_peer_1" {
   allow_forwarded_traffic      = true
   allow_gateway_transit        = true
   use_remote_gateways          = false
+
+  lifecycle {
+    ignore_changes = [remote_virtual_network_id]
+  }
 }
 
 resource "azurerm_virtual_network_peering" "vnet_peer_2" {
@@ -42,6 +24,12 @@ resource "azurerm_virtual_network_peering" "vnet_peer_2" {
   allow_forwarded_traffic      = true
   allow_gateway_transit        = false
   use_remote_gateways          = true
+
+    lifecycle {
+    ignore_changes = [remote_virtual_network_id]
+  }
 }
+
+
 
 
