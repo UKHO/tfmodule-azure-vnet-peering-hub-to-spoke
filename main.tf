@@ -52,4 +52,3 @@ resource "azurerm_virtual_network_peering" "vnet_peer_2" {
   }
 }
 
-
